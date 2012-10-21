@@ -1,7 +1,8 @@
 *makeshift.txt*	Plugin for detecting your build system.	Last change: 2012-10-21
 
                                                                    *makeshift*
->        __  __       _             _     _  __ _
+>
+         __  __       _             _     _  __ _
         |  \/  | __ _| | _____  ___| |__ (_)/ _| |_
         | |\/| |/ _` | |/ / _ \/ __| '_ \| | |_| __|
         | |  | | (_| |   <  __/\__ \ | | | |  _| |_
@@ -47,7 +48,8 @@ in your |vimrc|. >
 ==============================================================================
 
 ADDING A NEW BUILD SYSTEM                                   *makeshift-adding*
-                                  *makeshift-overriding* *'makeshift_systems'*
+                                                        *makeshift-overriding*
+                                                         *'makeshift_systems'*
 
 If Makeshift doesn't already know about your build system, or you wish to
 override the default program for a given file, you can define a dictionary,
