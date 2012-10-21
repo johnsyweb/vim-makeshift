@@ -85,6 +85,6 @@ report a bug on GitHub:
 
 LICENSE                                                    *makeshift-license*
 
-Makeshift is licensend under the same terms as Vim itself (see |license|).
+Makeshift is licensed under the same terms as Vim itself (see |license|).
 
  vim: tw=78:ts=8:ft=help:norl
