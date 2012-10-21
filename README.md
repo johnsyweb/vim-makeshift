@@ -83,8 +83,9 @@ Thanks
 ------
 
 If you find this plug-in useful, please follow this repository on
-[GitHub](https://github.com/johnsyweb/vim-makeshift). If you have something to
-say, you can contact [johnsyweb](http://johnsy.com/about/) on
+[GitHub](https://github.com/johnsyweb/vim-makeshift) and vote for it
+[vim.org](http://www.vim.org/scripts/script.php?script_id=4278). If you have
+something to say, you can contact [johnsyweb](http://johnsy.com/about/) on
 [Twitter](http://twitter.com/johnsyweb/) and
 [GitHub](https://github.com/johnsyweb/).
 
