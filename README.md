@@ -1,4 +1,4 @@
-makeshift
+Makeshift
 =========
 
 Selects the right 'makeprg' for your build system
@@ -56,7 +56,7 @@ in your `vimrc`:
 Adding a new build system
 -------------------------
 
-If makeshift doesn't already know about your build system, or you wish to
+If Makeshift doesn't already know about your build system, or you wish to
 override the default program for a given file, you can define a dictionary,
 which has filenames as keys and corresponding programs as values.
 
@@ -68,7 +68,7 @@ which has filenames as keys and corresponding programs as values.
 Removing a build system
 -----------------------
 
-If you don't want makeshift to set `'makeprg'` for a given build system, you
+If you don't want Makeshift to set `'makeprg'` for a given build system, you
 can disable it by defining a list of the files to ignore.
 
     let g:makeshift_ignored = ['Jamfile']
