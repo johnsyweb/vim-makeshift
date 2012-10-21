@@ -5,16 +5,17 @@ let g:loaded_makeshift = 0.1
 let s:keepcpo = &cpo
 set cpo&vim
 
-
-let s:build_systems = {
-            \'CMakeLists.txt': 'cmake',
-            \'Jamfile': 'bjam',
-            \'Makefile': 'make',
-            \'Rakefile': 'rake',
-            \'SConstruct': 'scons',
-            \'build.xml': 'ant',
-            \'pom.xml': 'mvn',
-            \}
+function! s:build_defaults()
+    let s:build_systems = {
+                \'CMakeLists.txt': 'cmake',
+                \'Jamfile': 'bjam',
+                \'Makefile': 'make',
+                \'Rakefile': 'rake',
+                \'SConstruct': 'scons',
+                \'build.xml': 'ant',
+                \'pom.xml': 'mvn',
+                \}
+endfunction
 
 
 function! s:add_user_systems()
@@ -47,9 +48,22 @@ function! s:determine_build_system()
 endfunction
 
 
-call s:remove_user_systems()
-call s:add_user_systems()
-call s:determine_build_system()
+function! s:makeshift()
+    call s:build_defaults()
+    call s:remove_user_systems()
+    call s:add_user_systems()
+    call s:determine_build_system()
+endfunction
+
+
+if !exists(":Makeshift")
+    command -nargs=0 Makeshift :call s:makeshift()
+endif
+
+
+if !exists("g:makeshift_on_startup") || g:makeshift_on_startup
+    call s:makeshift()
+endif
 
 
 let &cpo=s:keepcpo

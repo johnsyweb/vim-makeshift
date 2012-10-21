@@ -40,7 +40,18 @@ How it works
 ------------
 
 This plug-in works by looking for known build files in the current working
-directory and sets `'makeprg'`.
+directory and sets `'makeprg'`; by default this happens on start-up. You can
+use the command to re-evaluate `'makeprg'`:
+
+    :Makeshift
+
+Settings
+--------
+
+To prevent Makeshift from setting `'makeprg'` on start-up, put the following
+in your `vimrc`:
+
+    let g:makeshift_on_startup = 0
 
 Adding a new build system
 -------------------------
