@@ -40,8 +40,8 @@ How it works
 ------------
 
 This plug-in works by looking for known build files in the current working
-directory and sets `'makeprg'`; by default this happens on start-up. You can
-use the command to re-evaluate `'makeprg'`:
+directory upwards, and sets `'makeprg'`; by default this happens on start-up.
+You can use the command to re-evaluate `'makeprg'`:
 
     :Makeshift
 

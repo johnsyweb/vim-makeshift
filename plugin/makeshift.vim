@@ -37,13 +37,26 @@ function! s:remove_user_systems()
 endfunction
 
 
-function! s:determine_build_system()
+function! s:determine_build_system(dir)
     for [l:filename, l:program] in items(s:build_systems)
-        if filereadable(l:filename)
-            execute "setlocal makeprg=" . l:program
-            break
+        let l:found = globpath(a:dir, l:filename)
+        if filereadable(l:found)
+            return l:program
         endif
     endfor
+
+    let l:parent = fnamemodify(a:dir, ':h')
+    if l:parent != a:dir
+        return s:determine_build_system(l:parent)
+    endif
+
+endfunction
+
+
+function! s:set_makeprg(program)
+    if len(a:program)
+        let &makeprg=a:program
+    endif
 endfunction
 
 
@@ -51,7 +64,8 @@ function! s:makeshift()
     call s:build_defaults()
     call s:remove_user_systems()
     call s:add_user_systems()
-    call s:determine_build_system()
+    let l:program = s:determine_build_system(expand('%:p:h'))
+    call s:set_makeprg(l:program)
 endfunction
 
 
@@ -67,4 +81,4 @@ endif
 
 let &cpo=s:keepcpo
 unlet s:keepcpo
-" vim:noet:sw=4:ts=4:ft=vim
+" vim: noet:sw=4:ts=4:ft=vim
