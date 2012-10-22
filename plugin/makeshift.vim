@@ -7,7 +7,6 @@ set cpo&vim
 
 function! s:build_defaults()
     let s:build_systems = {
-                \'CMakeLists.txt': 'cmake',
                 \'Jamfile': 'bjam',
                 \'Makefile': 'make',
                 \'Rakefile': 'rake',

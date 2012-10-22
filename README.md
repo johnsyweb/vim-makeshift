@@ -53,6 +53,18 @@ in your `vimrc`:
 
     let g:makeshift_on_startup = 0
 
+Build Systems
+-------------
+
+Makshift currently associates the following files with their build systems:
+
+    * Jamfile: bjam
+    * Makefile: make
+    * Rakefile: rake
+    * SConstruct: scons
+    * build.xml: ant
+    * pom.xml: mvn
+
 Adding a new build system
 -------------------------
 
