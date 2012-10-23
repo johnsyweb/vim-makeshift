@@ -79,6 +79,11 @@ if !exists("g:makeshift_on_startup") || g:makeshift_on_startup
 endif
 
 
+if !exists("g:makeshift_on_bufread") || g:makeshift_on_bufread
+    autocmd BufRead * call s:makeshift()
+endif
+
+
 let &cpo=s:keepcpo
 unlet s:keepcpo
 " vim: noet:sw=4:ts=4:ft=vim

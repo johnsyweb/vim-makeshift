@@ -53,6 +53,12 @@ in your `vimrc`:
 
     let g:makeshift_on_startup = 0
 
+To prevent Makeshift from setting `'makeprg'` on
+[BufRead](http://vimdoc.sourceforge.net/htmldoc/autocmd.html#BufRead), put the
+following in your `vimrc`:
+
+    let g:makeshift_on_bufread = 0
+
 Build Systems
 -------------
 
