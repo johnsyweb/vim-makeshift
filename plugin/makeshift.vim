@@ -50,6 +50,7 @@ function! s:determine_build_system(dir)
         return s:determine_build_system(l:parent)
     endif
 
+	return ''
 endfunction
 
 
