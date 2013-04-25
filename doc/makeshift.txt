@@ -92,6 +92,18 @@ can disable it by defining a list of the files to ignore. >
 
 ==============================================================================
 
+ISSUES                                                     *makeshift-issues*
+
+Makeshift does not play well with |rails| [vimscript #1567].
+
+As a workaround: >
+    let g:loaded_makeshift=1
+<
+
+For more details, see https://github.com/johnsyweb/vim-makeshift/issues
+
+==============================================================================
+
 ABOUT                                                        *makeshift-about*
 
 Makeshift was written by Pete Johns. You can contact him via
