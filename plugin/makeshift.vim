@@ -1,12 +1,10 @@
-if exists("g:loaded_makeshift") || &cp || version < 700
+if exists('g:loaded_makeshift') || &cp || version < 700
     finish
 endif
 
-
-let g:loaded_makeshift = 0.4
+let g:loaded_makeshift = 0.5
 let s:keepcpo = &cpo
 set cpo&vim
-
 
 function! s:build_defaults()
     let s:build_systems = {
@@ -19,18 +17,17 @@ function! s:build_defaults()
                 \}
 endfunction
 
-
 function! s:add_user_systems()
-    if exists("g:makeshift_systems")
-        call extend(s:build_systems, g:makeshift_systems, "force")
+    if exists('g:makeshift_systems')
+        call extend(s:build_systems, g:makeshift_systems, 'force')
     endif
 endfunction
 
-
 function! s:remove_user_systems()
-    if exists("g:makeshift_ignored")
+    if exists('g:makeshift_ignored')
         for l:ignored in g:makeshift_ignored
             try
+                echomsg "Ignoring" . l:ignored
                 call remove(s:build_systems, l:ignored)
             catch
                 " NOOP
@@ -38,7 +35,6 @@ function! s:remove_user_systems()
         endfor
     endif
 endfunction
-
 
 function! s:determine_build_system(dir)
     for [l:filename, l:program] in items(s:build_systems)
@@ -53,16 +49,14 @@ function! s:determine_build_system(dir)
         return s:determine_build_system(l:parent)
     endif
 
-	return ''
+    return ''
 endfunction
-
 
 function! s:set_makeprg(program)
     if len(a:program)
-        let &makeprg=a:program
+        let &l:makeprg=a:program
     endif
 endfunction
-
 
 function! s:makeshift()
     call s:build_defaults()
@@ -72,22 +66,18 @@ function! s:makeshift()
     call s:set_makeprg(l:program)
 endfunction
 
-
-if !exists(":Makeshift")
+if !exists(':Makeshift')
     command -nargs=0 Makeshift :call s:makeshift()
 endif
 
-
-if !exists("g:makeshift_on_startup") || g:makeshift_on_startup
+if !exists('g:makeshift_on_startup') || g:makeshift_on_startup
     call s:makeshift()
 endif
 
-
-if !exists("g:makeshift_on_bufread") || g:makeshift_on_bufread
+if !exists('g:makeshift_on_bufread') || g:makeshift_on_bufread
     autocmd BufRead * call s:makeshift()
 endif
 
-
 let &cpo=s:keepcpo
 unlet s:keepcpo
-" vim: noet:sw=4:ts=4:ft=vim
+" vim: et:sw=4:ts=8:ft=vim
