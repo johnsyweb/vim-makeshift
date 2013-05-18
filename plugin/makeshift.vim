@@ -2,7 +2,7 @@ if exists('g:loaded_makeshift') || &cp || version < 700
     finish
 endif
 
-let g:loaded_makeshift = 0.5
+let g:loaded_makeshift = 0.6
 let s:keepcpo = &cpo
 set cpo&vim
 
@@ -66,8 +66,10 @@ function! s:makeshift()
     call s:set_makeprg(l:program)
 endfunction
 
-if !exists(':Makeshift')
-    command -nargs=0 Makeshift :call s:makeshift()
+if exists(':Makeshift') != 2
+    if !exists('g:makeshift_define_command') || g:makeshift_define_command != 0
+        command -nargs=0 Makeshift :call s:makeshift()
+    endif
 endif
 
 if !exists('g:makeshift_on_startup') || g:makeshift_on_startup
