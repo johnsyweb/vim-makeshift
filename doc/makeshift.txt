@@ -96,8 +96,8 @@ ISSUES                                                     *makeshift-issues*
 
 Makeshift does not play well with |rails| [vimscript #1567].
 
-As a workaround: >
-    let g:loaded_makeshift=1
+As a workaround, put the following in |$MYVIMRC| before Makeshift is loaded: >
+    let g:makeshift_define_command = 0
 <
 
 For more details, see https://github.com/johnsyweb/vim-makeshift/issues
