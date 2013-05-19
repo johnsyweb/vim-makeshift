@@ -1,4 +1,4 @@
-*makeshift.txt*	Plugin for detecting your build system.	Last change: 2012-10-21
+*makeshift.txt*	Plugin for detecting your build system.
 
                                                                    *makeshift*
 >
