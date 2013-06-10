@@ -89,19 +89,6 @@ If you don't want Makeshift to set |'makeprg'| for a given build system, you
 can disable it by defining a list of the files to ignore. >
     let g:makeshift_ignored = ['Jamfile']
 <
-
-==============================================================================
-
-ISSUES                                                     *makeshift-issues*
-
-Makeshift does not play well with |rails| [vimscript #1567].
-
-As a workaround, put the following in |$MYVIMRC| before Makeshift is loaded: >
-    let g:makeshift_define_command = 0
-<
-
-For more details, see https://github.com/johnsyweb/vim-makeshift/issues
-
 ==============================================================================
 
 ABOUT                                                        *makeshift-about*
