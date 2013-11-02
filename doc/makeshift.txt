@@ -16,7 +16,7 @@ You'll want to use this plugin if you work on a lot of projects with different
 build systems. You want your editor to be able to detect your current build
 system and set |'makeprg'| accordingly.
 
-To make building really fast, bind the |:make| command to a function key in
+To make building really fast, map the |:make| command to a function key in
 your |vimrc|. >
 
     nnoremap    <F5>   :<C-U>make<CR>
@@ -26,6 +26,7 @@ your |vimrc|. >
 
 HOW IT WORKS                                                   *makeshift-how*
                                                                *makeshift-cmd*
+                                                                  *:Makeshift*
 
 This plug-in works by looking for known build files in the current working
 directory upwards, and sets |'makeprg'|; by default this happens on start-up.
@@ -33,7 +34,25 @@ You can use the command to re-evaluate |'makeprg'|. >
 
     :Makeshift
 <
+                                                            *g:makeshift_root*
 
+Sometimes your build script won't be in the current working directory, this is
+particularly common when |'autochdir'| is set. For this reason :Makeshift sets
+g:makeshift_root to be the directory containing the build script that it used
+to determine the build system.
+
+                                                             *:MakeshiftBuild*
+
+|:MakeshiftBuild| is a wrapper around Vim's own |:make| command, which changes
+directory to |g:makeshift_root| before calling |:make| with any arguments you
+provide and then returns to your working directory. If you often work in
+subdirectories, you may want to map the |:MakeshiftBuild| command to a
+function key in your |vimrc|. >
+
+    nnoremap    <F5>   :<C-U>MakeshiftBuild<CR>
+    nnoremap    <F6>   :<C-U>MakeshiftBuild check<CR>
+    ...
+<
 ==============================================================================
 
 SETTINGS                                                  *makeshift-settings*
