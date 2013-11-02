@@ -57,7 +57,7 @@ in your |vimrc|. >
 
 BUILD SYSTEMS                                              *makeshift-systems*
 
-Makshift currently associates the following files with their build systems:
+Makeshift currently associates the following files with their build systems:
 
     * Jamfile: bjam
     * Makefile: make
