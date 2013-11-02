@@ -2,7 +2,7 @@ if exists('g:loaded_makeshift') || &cp || version < 700
     finish
 endif
 
-let g:loaded_makeshift = 0.6
+let g:loaded_makeshift = 0.7
 let s:keepcpo = &cpo
 set cpo&vim
 
