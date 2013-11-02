@@ -11,13 +11,13 @@ systems. I wanted Vim to be able to detect my current build system and set
 [`'makeprg'`](http://vimdoc.sourceforge.net/htmldoc/options.html#'makeprg')
 accordingly.
 
-To make building really fast, bind the
+To make building really fast, map the
 [`:make`](http://vimdoc.sourceforge.net/htmldoc/quickfix.html#:make_makeprg)
 command to a function key in your `$VIMRC`:
 
-
+```vim
     nnoremap    <F5>   :<C-U>make<CR>
-
+```
 
 Installation
 ------------
@@ -25,16 +25,22 @@ Installation
 I recommend installing [pathogen.vim](https://github.com/tpope/vim-pathogen),
 and then simply copy and paste:
 
+```sh
     cd ~/.vim/bundle
     git clone git://github.com/johnsyweb/vim-makeshift.git
+```
 
 Restart Vim and then:
 
+```vim
     :Helptags
+```
 
 Once help tags have been generated, you can view the manual with
 
+```vim
     :help makeshift
+```
 
 How it works
 ------------
@@ -43,7 +49,26 @@ This plug-in works by looking for known build files in the current working
 directory upwards, and sets `'makeprg'`; by default this happens on start-up.
 You can use the command to re-evaluate `'makeprg'`:
 
+```vim
     :Makeshift
+```
+
+Sometimes your build script won't be in the current working directory, this is
+particularly common when `'autochdir'` is set. For this reason :Makeshift sets
+g:makeshift_root to be the directory containing the build script that it used to
+determine the build system.
+
+`:MakeshiftBuild` is a wrapper around Vim's own `:make` command, which changes
+directory to `g:makeshift_root` before calling `:make` with any arguments you
+provide and then returns to your working directory. If you often work in
+subdirectories, you may want to map the `:MakeshiftBuild` command to a function
+key in your `vimrc`:
+
+```vim
+    nnoremap    <F5>   :<C-U>MakeshiftBuild<CR>
+    nnoremap    <F6>   :<C-U>MakeshiftBuild check<CR>
+    ...
+```
 
 Settings
 --------
@@ -62,7 +87,7 @@ following in your `vimrc`:
 Build Systems
 -------------
 
-Makshift currently associates the following files with their build systems:
+Makeshift currently associates the following files with their build systems:
 
     * Jamfile: bjam
     * Makefile: make

@@ -2,7 +2,7 @@ if exists('g:loaded_makeshift') || &cp || version < 700
     finish
 endif
 
-let g:loaded_makeshift = 0.6
+let g:loaded_makeshift = 0.7
 let s:keepcpo = &cpo
 set cpo&vim
 
@@ -40,6 +40,7 @@ function! s:determine_build_system(dir)
     for [l:filename, l:program] in items(s:build_systems)
         let l:found = globpath(a:dir, l:filename)
         if filereadable(l:found)
+            let g:makeshift_root = a:dir
             return l:program
         endif
     endfor
@@ -66,10 +67,21 @@ function! s:makeshift()
     call s:set_makeprg(l:program)
 endfunction
 
+function s:make_from_root(...)
+    echo g:makeshift_root
+    exec "cd! " . g:makeshift_root
+    exec "make " . join(a:000)
+    cd! -
+endfunction
+
 if exists(':Makeshift') != 2
     if !exists('g:makeshift_define_command') || g:makeshift_define_command != 0
         command -nargs=0 Makeshift :call s:makeshift()
     endif
+endif
+
+if exists(':MakeshiftBuild') != 2
+    command -nargs=* MakeshiftBuild :call s:make_from_root(<q-args>)
 endif
 
 if !exists('g:makeshift_on_startup') || g:makeshift_on_startup
