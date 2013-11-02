@@ -67,9 +67,10 @@ function! s:makeshift()
     call s:set_makeprg(l:program)
 endfunction
 
-function s:make_from_root()
+function s:make_from_root(...)
+    echo g:makeshift_root
     exec "cd! " . g:makeshift_root
-    make
+    exec "make " . join(a:000)
     cd! -
 endfunction
 
@@ -80,7 +81,7 @@ if exists(':Makeshift') != 2
 endif
 
 if exists(':MakeshiftBuild') != 2
-    command -nargs=0 MakeshiftBuild :call s:make_from_root()
+    command -nargs=* MakeshiftBuild :call s:make_from_root(<q-args>)
 endif
 
 if !exists('g:makeshift_on_startup') || g:makeshift_on_startup
