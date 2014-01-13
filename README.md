@@ -95,6 +95,7 @@ Makeshift currently associates the following files with their build systems:
     * SConstruct: scons
     * build.xml: ant
     * pom.xml: mvn
+    * build.gradle: gradle
 
 Adding a new build system
 -------------------------
