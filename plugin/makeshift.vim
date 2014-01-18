@@ -93,6 +93,10 @@ if !exists('g:makeshift_on_bufread') || g:makeshift_on_bufread
     autocmd BufRead * call s:makeshift()
 endif
 
+if !exists('g:makeshift_on_bufnewfile') || g:makeshift_on_bufnewfile
+    autocmd BufNewFile * call s:makeshift()
+endif
+
 let &cpo=s:keepcpo
 unlet s:keepcpo
 " vim: et:sw=4:ts=8:ft=vim

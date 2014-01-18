@@ -58,6 +58,7 @@ function key in your |vimrc|. >
 SETTINGS                                                  *makeshift-settings*
                                                       *'makeshift_on_startup'*
                                                       *'makeshift_on_bufread'*
+                                                      *'makeshift_on_bufnewfile'*
 
 To prevent Makeshift from setting |'makeprg'| on start-up, put the following
 in your |vimrc|. >
@@ -65,10 +66,16 @@ in your |vimrc|. >
     let g:makeshift_on_startup = 0
 <
 
-To prevent Makeshift from setting |'makeprg'| on |BufRead|, put the following
-in your |vimrc|. >
+To prevent Makeshift from setting |'makeprg'| on |BufRead| put the following in
+your |vimrc|. >
 
     let g:makeshift_on_bufread = 0
+<
+
+To prevent Makeshift from setting |'makeprg'| on |BufNewFile| put the following
+in your |vimrc|. >
+
+    let g:makeshift_on_bufnewfile = 0
 <
 
 
