@@ -84,6 +84,12 @@ following in your `vimrc`:
 
     let g:makeshift_on_bufread = 0
 
+To prevent Makeshift from setting `'makeprg'` on
+[BufNewFile](http://vimdoc.sourceforge.net/htmldoc/autocmd.html#BufNewFile),
+put the following in your `vimrc`:
+
+    let g:makeshift_on_bufnewfile = 0
+
 Build Systems
 -------------
 
