@@ -139,3 +139,12 @@ something to say, you can contact [johnsyweb](http://johnsy.com/about/) on
 [Twitter](http://twitter.com/johnsyweb/) and
 [GitHub](https://github.com/johnsyweb/).
 
+Many thanks
+-----------
+
+I'm grateful for contributions to what was a solo project (hooray for [GitHub
+:octocat:](http://github.com/))! If you'd like to thank the contributors, you
+can find their details here:
+
+https://github.com/johnsyweb/vim-makeshift/graphs/contributors
+
