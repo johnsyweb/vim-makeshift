@@ -14,6 +14,7 @@ function! s:build_defaults()
                 \'SConstruct': 'scons',
                 \'build.gradle': 'gradle',
                 \'build.xml': 'ant',
+                \'mix.exs': 'mix',
                 \'pom.xml': 'mvn',
                 \}
 endfunction
