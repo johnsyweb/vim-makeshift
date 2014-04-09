@@ -3,6 +3,7 @@ if exists('g:loaded_makeshift') || &cp || version < 700
 endif
 
 let g:loaded_makeshift = 1
+let s:default_autochdir = &autochdir
 let s:keepcpo = &cpo
 set cpo&vim
 
@@ -58,6 +59,15 @@ endfunction
 function! s:set_makeprg(program)
     if len(a:program)
         let &l:makeprg=a:program
+
+        if exists('g:makeshift_chdir') && g:makeshift_chdir
+            setlocal noautochdir
+            if exists('b:makeshift_root')
+                exec "cd " . b:makeshift_root
+            endif
+        endif
+    elseif exists('g:makeshift_chdir') && g:makeshift_chdir
+        let &autochdir = s:default_autochdir
     endif
 endfunction
 
@@ -70,7 +80,6 @@ function! s:makeshift()
 endfunction
 
 function s:make_from_root(...)
-    echo b:makeshift_root
     exec "cd! " . b:makeshift_root
     exec "make " . join(a:000)
     cd! -
