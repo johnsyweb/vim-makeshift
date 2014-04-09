@@ -42,7 +42,7 @@ function! s:determine_build_system(dir)
     for [l:filename, l:program] in items(s:build_systems)
         let l:found = globpath(a:dir, l:filename)
         if filereadable(l:found)
-            let g:makeshift_root = a:dir
+            let b:makeshift_root = fnameescape(a:dir)
             return l:program
         endif
     endfor
@@ -70,8 +70,8 @@ function! s:makeshift()
 endfunction
 
 function s:make_from_root(...)
-    echo g:makeshift_root
-    exec "cd! " . g:makeshift_root
+    echo b:makeshift_root
+    exec "cd! " . b:makeshift_root
     exec "make " . join(a:000)
     cd! -
 endfunction
