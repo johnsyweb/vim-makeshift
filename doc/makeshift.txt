@@ -53,12 +53,17 @@ function key in your |vimrc|. >
     nnoremap    <F6>   :<C-U>MakeshiftBuild check<CR>
     ...
 <
+
+Alternatively you can use the |makeshift_chdir| option to automatically adapt
+the current working dir to the base directory of the build file.
 ==============================================================================
 
 SETTINGS                                                  *makeshift-settings*
                                                       *'makeshift_on_startup'*
                                                       *'makeshift_on_bufread'*
                                                       *'makeshift_on_bufnewfile'*
+                                                      *'makeshift_on_bufenter'*
+                                                      *'makeshift_chdir'*
 
 To prevent Makeshift from setting |'makeprg'| on start-up, put the following
 in your |vimrc|. >
@@ -78,6 +83,18 @@ in your |vimrc|. >
     let g:makeshift_on_bufnewfile = 0
 <
 
+To prevent Makeshift from setting |'makeprg'| on |BufEnter| put the following in
+your |vimrc|. >
+
+    let g:makeshift_on_bufenter = 0
+<
+
+To automatically change the current working directory to the directory of the
+make-file (or the base file of any other build system) put the following in
+your |vimrc|. >
+
+    let g:makeshift_chdir = 1
+<
 
 ==============================================================================
 
