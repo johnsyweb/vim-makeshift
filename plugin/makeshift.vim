@@ -59,11 +59,15 @@ endfunction
 function! s:set_makeprg(program)
     if len(a:program)
         let &l:makeprg=a:program
+    endif
+endfunction
 
+function! s:set_makedir(change_dir)
+    if a:change_dir
         if exists('g:makeshift_chdir') && g:makeshift_chdir
             setlocal noautochdir
             if exists('b:makeshift_root')
-                exec "cd " . b:makeshift_root
+                exec "cd! " . b:makeshift_root
             endif
         endif
     elseif exists('g:makeshift_chdir') && g:makeshift_chdir
@@ -77,6 +81,7 @@ function! s:makeshift()
     call s:add_user_systems()
     let l:program = s:determine_build_system(expand('%:p:h'))
     call s:set_makeprg(l:program)
+    call s:set_makedir(len(l:program) > 0)
 endfunction
 
 function s:make_from_root(...)
