@@ -1,22 +1,20 @@
 Makeshift
 =========
 
-Selects the right 'makeprg' for your build system
+Plugin for detecting your build system.
 
 Introduction
 ------------
 
-I wrote this plugin because I work on a lot of projects with different build
-systems. I wanted Vim to be able to detect my current build system and set
-[`'makeprg'`](http://vimdoc.sourceforge.net/htmldoc/options.html#'makeprg')
-accordingly.
+You'll want to use this plugin if you work on a lot of projects with different
+build systems. You want your editor to be able to detect your current build
+system and set `'makeprg'` accordingly.
 
-To make building really fast, map the
-[`:make`](http://vimdoc.sourceforge.net/htmldoc/quickfix.html#:make_makeprg)
-command to a function key in your `$VIMRC`:
+To make building really fast, map the `:make` command to a function key in
+your vimrc.
 
 ```vim
-    nnoremap    <F5>   :<C-U>make<CR>
+nnoremap <F5> :<C-U>make<CR>
 ```
 
 Installation
@@ -26,20 +24,15 @@ I recommend installing [pathogen.vim](https://github.com/tpope/vim-pathogen),
 and then simply copy and paste:
 
 ```sh
-    cd ~/.vim/bundle
-    git clone git://github.com/johnsyweb/vim-makeshift.git
-```
-
-Restart Vim and then:
-
-```vim
-    :Helptags
+cd ~/.vim/bundle
+git clone git://github.com/johnsyweb/vim-makeshift.git
+vim -cHelptags
 ```
 
 Once help tags have been generated, you can view the manual with
 
 ```vim
-    :help makeshift
+:help makeshift
 ```
 
 How it works
@@ -50,45 +43,57 @@ directory upwards, and sets `'makeprg'`; by default this happens on start-up.
 You can use the command to re-evaluate `'makeprg'`:
 
 ```vim
-    :Makeshift
+:Makeshift
 ```
 
 Sometimes your build script won't be in the current working directory, this is
-particularly common when `'autochdir'` is set. For this reason :Makeshift sets
-g:makeshift_root to be the directory containing the build script that it used to
-determine the build system.
+particularly common when `'autochdir'` is set. For this reason `:Makeshift` sets
+`b:makeshift_root` to be the directory containing the build script that it used
+to determine the build system.
 
 `:MakeshiftBuild` is a wrapper around Vim's own `:make` command, which changes
-directory to `g:makeshift_root` before calling `:make` with any arguments you
+directory to `b:makeshift_root` before calling `:make` with any arguments you
 provide and then returns to your working directory. If you often work in
 subdirectories, you may want to map the `:MakeshiftBuild` command to a function
 key in your `vimrc`:
 
 ```vim
-    nnoremap    <F5>   :<C-U>MakeshiftBuild<CR>
-    nnoremap    <F6>   :<C-U>MakeshiftBuild check<CR>
-    ...
+nnoremap <F5> :<C-U>MakeshiftBuild<CR>
+nnoremap <F6> :<C-U>MakeshiftBuild check<CR>
+...
 ```
+
+Alternatively you can use the `makeshift_chdir` option to automatically change
+the current working directory to the one containing your build script.
+
+==============================================================================
 
 Settings
 --------
 
-To prevent Makeshift from setting `'makeprg'` on start-up, put the following
-in your `vimrc`:
+To tune the behaviour of this plugin, add any of the following switches to
+your `vimrc`:
 
     let g:makeshift_on_startup = 0
 
 To prevent Makeshift from setting `'makeprg'` on
-[BufRead](http://vimdoc.sourceforge.net/htmldoc/autocmd.html#BufRead), put the
-following in your `vimrc`:
+[BufRead](http://vimdoc.sourceforge.net/htmldoc/autocmd.html#BufRead):
 
     let g:makeshift_on_bufread = 0
 
 To prevent Makeshift from setting `'makeprg'` on
-[BufNewFile](http://vimdoc.sourceforge.net/htmldoc/autocmd.html#BufNewFile),
-put the following in your `vimrc`:
+[BufNewFile](http://vimdoc.sourceforge.net/htmldoc/autocmd.html#BufNewFile):
 
     let g:makeshift_on_bufnewfile = 0
+
+To prevent Makeshift from setting `'makeprg'` on
+[BufEnter](http://vimdoc.sourceforge.net/htmldoc/autocmd.html#BufEnter):
+
+    let g:makeshift_on_bufenter = 0
+
+To automatically change directory to `'b:makeshift_root'` when it is discovered:
+
+    let g:makeshift_chdir = 1
 
 Build Systems
 -------------
@@ -111,9 +116,11 @@ If Makeshift doesn't already know about your build system, or you wish to
 override the default program for a given file, you can define a dictionary,
 which has filenames as keys and corresponding programs as values.
 
-    let g:makeshift_systems = {
-        \'build.ninja ': 'ninja',
-        \}
+```vim
+let g:makeshift_systems = {
+    \'build.ninja ': 'ninja',
+    \}
+```
 
 
 Removing a build system
@@ -122,7 +129,9 @@ Removing a build system
 If you don't want Makeshift to set `'makeprg'` for a given build system, you
 can disable it by defining a list of the files to ignore.
 
-    let g:makeshift_ignored = ['Jamfile']
+```vim
+let g:makeshift_ignored = ['Jamfile']
+```
 
 License
 -------
