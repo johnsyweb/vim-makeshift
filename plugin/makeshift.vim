@@ -3,6 +3,7 @@ if exists('g:loaded_makeshift') || &cp || version < 700
 endif
 
 let g:loaded_makeshift = 1
+let s:default_autochdir = &autochdir
 let s:keepcpo = &cpo
 set cpo&vim
 
@@ -42,7 +43,7 @@ function! s:determine_build_system(dir)
     for [l:filename, l:program] in items(s:build_systems)
         let l:found = globpath(a:dir, l:filename)
         if filereadable(l:found)
-            let g:makeshift_root = a:dir
+            let b:makeshift_root = fnameescape(a:dir)
             return l:program
         endif
     endfor
@@ -61,17 +62,30 @@ function! s:set_makeprg(program)
     endif
 endfunction
 
+function! s:set_makedir(change_dir)
+    if a:change_dir
+        if exists('g:makeshift_chdir') && g:makeshift_chdir
+            setlocal noautochdir
+            if exists('b:makeshift_root')
+                exec "cd! " . b:makeshift_root
+            endif
+        endif
+    elseif exists('g:makeshift_chdir') && g:makeshift_chdir
+        let &autochdir = s:default_autochdir
+    endif
+endfunction
+
 function! s:makeshift()
     call s:build_defaults()
     call s:remove_user_systems()
     call s:add_user_systems()
     let l:program = s:determine_build_system(expand('%:p:h'))
     call s:set_makeprg(l:program)
+    call s:set_makedir(len(l:program) > 0)
 endfunction
 
 function s:make_from_root(...)
-    echo g:makeshift_root
-    exec "cd! " . g:makeshift_root
+    exec "cd! " . b:makeshift_root
     exec "make " . join(a:000)
     cd! -
 endfunction
@@ -96,6 +110,10 @@ endif
 
 if !exists('g:makeshift_on_bufnewfile') || g:makeshift_on_bufnewfile
     autocmd BufNewFile * call s:makeshift()
+endif
+
+if !exists('g:makeshift_on_bufenter') || g:makeshift_on_bufenter
+    autocmd BufEnter * call s:makeshift()
 endif
 
 let &cpo=s:keepcpo

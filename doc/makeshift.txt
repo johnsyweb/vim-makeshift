@@ -19,7 +19,7 @@ system and set |'makeprg'| accordingly.
 To make building really fast, map the |:make| command to a function key in
 your |vimrc|. >
 
-    nnoremap    <F5>   :<C-U>make<CR>
+    nnoremap <F5> :<C-U>make<CR>
 <
 
 ==============================================================================
@@ -30,55 +30,68 @@ HOW IT WORKS                                                   *makeshift-how*
 
 This plug-in works by looking for known build files in the current working
 directory upwards, and sets |'makeprg'|; by default this happens on start-up.
-You can use the command to re-evaluate |'makeprg'|. >
+You can use the command to re-evaluate |'makeprg'|: >
 
     :Makeshift
 <
-                                                            *g:makeshift_root*
+                                                            *b:makeshift_root*
 
 Sometimes your build script won't be in the current working directory, this is
-particularly common when |'autochdir'| is set. For this reason :Makeshift sets
-g:makeshift_root to be the directory containing the build script that it used
-to determine the build system.
+particularly common when |'autochdir'| is set. For this reason *:Makeshift*
+sets `b:makeshift_root` to be the directory containing the build script that
+it used to determine the build system.
 
                                                              *:MakeshiftBuild*
 
 |:MakeshiftBuild| is a wrapper around Vim's own |:make| command, which changes
-directory to |g:makeshift_root| before calling |:make| with any arguments you
+directory to |b:makeshift_root| before calling |:make| with any arguments you
 provide and then returns to your working directory. If you often work in
 subdirectories, you may want to map the |:MakeshiftBuild| command to a
 function key in your |vimrc|. >
 
-    nnoremap    <F5>   :<C-U>MakeshiftBuild<CR>
-    nnoremap    <F6>   :<C-U>MakeshiftBuild check<CR>
+    nnoremap <F5> :<C-U>MakeshiftBuild<CR>
+    nnoremap <F6> :<C-U>MakeshiftBuild check<CR>
     ...
 <
+Alternatively you can use the |makeshift_chdir| option to automatically change
+the current working directory to the one containing your build script.
+
 ==============================================================================
 
 SETTINGS                                                  *makeshift-settings*
-                                                      *'makeshift_on_startup'*
-                                                      *'makeshift_on_bufread'*
-                                                      *'makeshift_on_bufnewfile'*
 
-To prevent Makeshift from setting |'makeprg'| on start-up, put the following
-in your |vimrc|. >
+To tune the behaviour of this plugin, add any of the following switches to
+your |vimrc|.
+                                                      *'makeshift_on_startup'*
+
+To prevent Makeshift from setting |'makeprg'| on start-up: >
 
     let g:makeshift_on_startup = 0
 <
+                                                      *'makeshift_on_bufread'*
 
-To prevent Makeshift from setting |'makeprg'| on |BufRead| put the following in
-your |vimrc|. >
+To prevent Makeshift from setting |'makeprg'| on |BufRead|: >
 
     let g:makeshift_on_bufread = 0
 <
+                                                   *'makeshift_on_bufnewfile'*
 
-To prevent Makeshift from setting |'makeprg'| on |BufNewFile| put the following
-in your |vimrc|. >
+To prevent Makeshift from setting |'makeprg'| on |BufNewFile|: >
 
     let g:makeshift_on_bufnewfile = 0
 <
+                                                      *'makeshift_on_bufenter'*
 
+To prevent Makeshift from setting |'makeprg'| on |BufEnter|: >
 
+    let g:makeshift_on_bufenter = 0
+<
+                                                           *'makeshift_chdir'*
+
+To automatically change directory to 'b:makeshift_root' when it is discovered:
+>
+    let g:makeshift_chdir = 1
+<
 ==============================================================================
 
 BUILD SYSTEMS                                              *makeshift-systems*
