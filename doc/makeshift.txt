@@ -37,7 +37,7 @@ You can use the command to re-evaluate |'makeprg'|: >
                                                             *b:makeshift_root*
 
 Sometimes your build script won't be in the current working directory, this is
-particularly common when |'autochdir'| is set. For this reason *:Makeshift*
+particularly common when |'autochdir'| is set. For this reason |:Makeshift|
 sets `b:makeshift_root` to be the directory containing the build script that
 it used to determine the build system.
 
