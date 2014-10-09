@@ -79,7 +79,13 @@ function! s:makeshift()
     call s:build_defaults()
     call s:remove_user_systems()
     call s:add_user_systems()
-    let l:program = s:determine_build_system(expand('%:p:h'))
+    let l:program = ''
+    if exists('g:makeshift_in_pwd') && g:makeshift_in_pwd
+        let l:program = s:determine_build_system(getcwd())
+    endif
+    if len(l:program) == 0
+        let l:program = s:determine_build_system(expand('%:p:h'))
+    endif
     call s:set_makeprg(l:program)
     call s:set_makedir(len(l:program) > 0)
 endfunction
