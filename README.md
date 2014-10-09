@@ -95,6 +95,10 @@ To automatically change directory to `'b:makeshift_root'` when it is discovered:
 
     let g:makeshift_chdir = 1
 
+To try the build file in the current directory before searching from the file directory:
+
+    let g:makeshift_use_pwd_first = 1
+
 Build Systems
 -------------
 
