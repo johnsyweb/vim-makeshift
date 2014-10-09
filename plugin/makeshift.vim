@@ -80,7 +80,7 @@ function! s:makeshift()
     call s:remove_user_systems()
     call s:add_user_systems()
     let l:program = ''
-    if exists('g:makeshift_in_pwd') && g:makeshift_in_pwd
+    if exists('g:makeshift_use_pwd_first') && g:makeshift_use_pwd_first
         let l:program = s:determine_build_system(getcwd())
     endif
     if len(l:program) == 0
