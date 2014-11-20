@@ -30,7 +30,6 @@ function! s:remove_user_systems()
     if exists('g:makeshift_ignored')
         for l:ignored in g:makeshift_ignored
             try
-                echomsg "Ignoring" . l:ignored
                 call remove(s:build_systems, l:ignored)
             catch
                 " NOOP
