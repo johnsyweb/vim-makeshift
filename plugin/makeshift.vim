@@ -11,12 +11,14 @@ function! s:build_defaults()
     let s:build_systems = {
                 \'Jamfile': 'bjam',
                 \'Makefile': 'make',
+                \'GNUmakefile': 'make',
                 \'Rakefile': 'rake',
                 \'SConstruct': 'scons',
                 \'build.gradle': 'gradle',
                 \'build.xml': 'ant',
                 \'mix.exs': 'mix',
                 \'pom.xml': 'mvn',
+                \'build.ninja': 'ninja',
                 \}
 endfunction
 
@@ -30,7 +32,6 @@ function! s:remove_user_systems()
     if exists('g:makeshift_ignored')
         for l:ignored in g:makeshift_ignored
             try
-                echomsg "Ignoring" . l:ignored
                 call remove(s:build_systems, l:ignored)
             catch
                 " NOOP
