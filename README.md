@@ -106,12 +106,14 @@ Makeshift currently associates the following files with their build systems:
 
     * Jamfile: bjam
     * Makefile: make
+    * GNUmakefile: make
     * Rakefile: rake
     * SConstruct: scons
     * build.gradle: gradle
     * build.xml: ant
     * mix.exs: mix
     * pom.xml: mvn
+    * build.ninja: ninja
 
 Adding a new build system
 -------------------------
@@ -122,7 +124,7 @@ which has filenames as keys and corresponding programs as values.
 
 ```vim
 let g:makeshift_systems = {
-    \'build.ninja ': 'ninja',
+    \'build.sbt ': 'sbt',
     \}
 ```
 
