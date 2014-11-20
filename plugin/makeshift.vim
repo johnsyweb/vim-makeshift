@@ -11,12 +11,14 @@ function! s:build_defaults()
     let s:build_systems = {
                 \'Jamfile': 'bjam',
                 \'Makefile': 'make',
+                \'GNUmakefile': 'make',
                 \'Rakefile': 'rake',
                 \'SConstruct': 'scons',
                 \'build.gradle': 'gradle',
                 \'build.xml': 'ant',
                 \'mix.exs': 'mix',
                 \'pom.xml': 'mvn',
+                \'build.ninja': 'ninja',
                 \}
 endfunction
 
