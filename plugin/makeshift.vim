@@ -19,6 +19,7 @@ function! s:build_defaults()
                 \'mix.exs': 'mix',
                 \'pom.xml': 'mvn',
                 \'build.ninja': 'ninja',
+                \'wscript': 'waf',
                 \}
 endfunction
 
@@ -86,6 +87,12 @@ function! s:makeshift()
     endif
     if len(l:program) == 0
         let l:program = s:determine_build_system(expand('%:p:h'))
+    endif
+    if l:program == 'waf'
+        let l:found = globpath(b:makeshift_root, l:program)
+        if filereadable(l:found)
+            let l:program = l:found
+        endif
     endif
     call s:set_makeprg(l:program)
     call s:set_makedir(len(l:program) > 0)
