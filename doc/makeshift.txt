@@ -95,10 +95,16 @@ To automatically change directory to 'b:makeshift_root' when it is discovered:
                                                    *'makeshift_use_pwd_first'*
 
 To try the build file in the current directory before searching from the file
-directory:
->
+directory: >
+
     let g:makeshift_use_pwd_first = 1
 <
+                                                   *'makeshift_find_bundled'*
+
+To enable search for bundled build program/script: >
+
+    let g:makeshift_find_bundled = 1
+
 ==============================================================================
 
 BUILD SYSTEMS                                              *makeshift-systems*
@@ -113,6 +119,8 @@ Makeshift currently associates the following files with their build systems:
     * build.xml: ant
     * mix.exs: mix
     * pom.xml: mvn
+    * build.ninja: ninja
+    * wscript: waf
 
 ==============================================================================
 
@@ -124,7 +132,7 @@ If Makeshift doesn't already know about your build system, or you wish to
 override the default program for a given file, you can define a dictionary,
 which has filenames as keys and corresponding programs as values. >
     let g:makeshift_systems = {
-        \'build.ninja ': 'ninja',
+        \'build.sbt ': 'sbt',
         \}
 <
 

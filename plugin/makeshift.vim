@@ -19,6 +19,7 @@ function! s:build_defaults()
                 \'mix.exs': 'mix',
                 \'pom.xml': 'mvn',
                 \'build.ninja': 'ninja',
+                \'wscript': 'waf',
                 \}
 endfunction
 
@@ -57,9 +58,21 @@ function! s:determine_build_system(dir)
     return ''
 endfunction
 
+function! s:find_bundled(program)
+    let l:bundled = globpath(b:makeshift_root, a:program)
+    if filereadable(l:bundled)
+        return l:bundled
+    endif
+    return a:program
+endfunction
+
 function! s:set_makeprg(program)
     if len(a:program)
-        let &l:makeprg=a:program
+        if exists('g:makeshift_find_bundled') && g:makeshift_find_bundled
+            let &l:makeprg = s:find_bundled(a:program)
+        else
+            let &l:makeprg = a:program
+        endif
     endif
 endfunction
 

@@ -101,6 +101,10 @@ To try the build file in the current directory before searching from the file di
 
     let g:makeshift_use_pwd_first = 1
 
+To enable search for bundled build program/script:
+
+    let g:makeshift_find_bundled = 1
+
 Build Systems
 -------------
 
@@ -116,6 +120,7 @@ Makeshift currently associates the following files with their build systems:
     * mix.exs: mix
     * pom.xml: mvn
     * build.ninja: ninja
+    * wscript: waf
 
 Adding a new build system
 -------------------------
