@@ -58,9 +58,21 @@ function! s:determine_build_system(dir)
     return ''
 endfunction
 
+function! s:find_bundled(program)
+    let l:bundled = globpath(b:makeshift_root, a:program)
+    if filereadable(l:bundled)
+        return l:bundled
+    endif
+    return a:program
+endfunction
+
 function! s:set_makeprg(program)
     if len(a:program)
-        let &l:makeprg=a:program
+        if exists('g:makeshift_find_bundled') && g:makeshift_find_bundled
+            let &l:makeprg = s:find_bundled(a:program)
+        else
+            let &l:makeprg = a:program
+        endif
     endif
 endfunction
 
@@ -87,12 +99,6 @@ function! s:makeshift()
     endif
     if len(l:program) == 0
         let l:program = s:determine_build_system(expand('%:p:h'))
-    endif
-    if l:program == 'waf'
-        let l:found = globpath(b:makeshift_root, l:program)
-        if filereadable(l:found)
-            let l:program = l:found
-        endif
     endif
     call s:set_makeprg(l:program)
     call s:set_makedir(len(l:program) > 0)
