@@ -65,6 +65,9 @@ nnoremap <F6> :<C-U>MakeshiftBuild check<CR>
 ...
 ```
 
+If you prefer to use the location list, there's also `:LMakeshiftBuild`, which
+is the same as `:MakeshiftBuild` but wraps `:lmake` instead.
+
 Alternatively you can use the `makeshift_chdir` option to automatically change
 the current working directory to the one containing your build script.
 
