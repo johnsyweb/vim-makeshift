@@ -110,6 +110,12 @@ function s:make_from_root(...)
     cd! -
 endfunction
 
+function s:lmake_from_root(...)
+    exec "cd! " . b:makeshift_root
+    exec "lmake " . join(a:000)
+    cd! -
+endfunction
+
 if exists(':Makeshift') != 2
     if !exists('g:makeshift_define_command') || g:makeshift_define_command != 0
         command -nargs=0 Makeshift :call s:makeshift()
@@ -118,6 +124,10 @@ endif
 
 if exists(':MakeshiftBuild') != 2
     command -nargs=* MakeshiftBuild :call s:make_from_root(<q-args>)
+endif
+
+if exists(':LMakeshiftBuild') != 2
+    command -nargs=* LMakeshiftBuild :call s:lmake_from_root(<q-args>)
 endif
 
 if !exists('g:makeshift_on_startup') || g:makeshift_on_startup

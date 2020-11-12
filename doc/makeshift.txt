@@ -56,6 +56,11 @@ function key in your |vimrc|. >
 Alternatively you can use the |makeshift_chdir| option to automatically change
 the current working directory to the one containing your build script.
 
+                                                            *:LMakeshiftBuild*
+
+|:LMakeshiftBuild| is the same as |:MakeshiftBuild|, but wraps |:lmake|
+instead of |:make|.
+
 ==============================================================================
 
 SETTINGS                                                  *makeshift-settings*
