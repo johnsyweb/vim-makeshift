@@ -1,8 +1,6 @@
 Makeshift
 =========
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/johnsyweb/vim-makeshift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Plugin for detecting your build system.
 
 Introduction
@@ -164,9 +162,6 @@ If you find this plug-in useful, please follow this repository on
 something to say, you can contact [johnsyweb](http://johnsy.com/about/) on
 [Twitter](http://twitter.com/johnsyweb/) and
 [GitHub](https://github.com/johnsyweb/).
-
-Many thanks
------------
 
 I'm grateful for contributions to what was a solo project (hooray for [GitHub
 :octocat:](http://github.com/))! If you'd like to thank the contributors, you
